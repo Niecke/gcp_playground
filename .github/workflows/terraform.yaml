@@ -1,23 +1,23 @@
 name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
 
 on:
- push:
-   branches:
-   - test
-   paths:
-   - terraform/**
- pull_request:
-   branches:
-   - test
-   paths:
-   - terraform/**
+  push:
+    branches:
+    - test
+    paths:
+    - terraform/**
+  pull_request:
+    branches:
+    - test
+    paths:
+    - terraform/**
 
 
 env:
- # verbosity setting for Terraform logs
- TF_LOG: INFO
- # Credentials for deployment to GCP
- #GCLOUD_FILE: ${{ secrets.GCLOUD_FILE }}
+  # verbosity setting for Terraform logs
+  TF_LOG: INFO
+  # Credentials for deployment to GCP
+  #GCLOUD_FILE: ${{ secrets.GCLOUD_FILE }}
 
 jobs:
   terraform:
