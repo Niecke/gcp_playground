@@ -41,6 +41,11 @@ jobs:
       - name: Write secret to file
         run: echo "${{ secrets.GCLOUD_FILE }}" > ./gcloud.json
 
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCLOUD_FILE }}'
+
       - name: Terraform init
         id: init
         run: terraform init
