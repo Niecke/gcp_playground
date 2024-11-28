@@ -39,7 +39,7 @@ jobs:
           terraform_version: 1.10.0
       
       - name: Write secret to file
-        run: echo "${{ secrets.GCLOUD_FILE }}" > ./secrets/gcloud.json
+        run: echo "${{ secrets.GCLOUD_FILE }}" > ./gcloud.json
 
       - name: Terraform init
         id: init
