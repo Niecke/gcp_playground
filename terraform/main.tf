@@ -12,8 +12,7 @@ terraform {
 }
 
 provider "google" {
-  #credentials = "./gcloud.json"
-  project = "gcp-playground"
+  project = "gcp-playground-443120"
   region  = "us-central1"
   zone    = "us-central1-c"
 }
