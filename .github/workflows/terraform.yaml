@@ -1,0 +1,46 @@
+name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
+
+on:
+ push:
+   branches:
+   - test
+   paths:
+   - terraform/**
+ pull_request:
+   branches:
+   - test
+   paths:
+   - terraform/**
+
+
+env:
+ # verbosity setting for Terraform logs
+ TF_LOG: INFO
+ # Credentials for deployment to GCP
+ #GCLOUD_FILE: ${{ secrets.GCLOUD_FILE }}
+
+jobs:
+  terraform:
+    name: "Terraform Infrastructure Change Management"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Terraform files in the terraform directory.
+        working-directory: ./terraform
+ 
+   steps:
+      - name: Checkout the repository to the runner
+        uses: actions/checkout@v4
+ 
+      - name: Setup Terraform with specified version on the runner
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.10.0
+      
+      - name: Write secret to file
+        run: echo "${{ secrets.GCLOUD_FILE }}" > ./secrets/gcloud.json
+
+      - name: Terraform init
+        id: init
+        run: terraform init
